@@ -1,8 +1,6 @@
 #This is a password generator
 import random
 from tkinter import *
-from tkinter import ttk
-
 
 class assignment:
     
@@ -15,39 +13,46 @@ class assignment:
         # self.all= self.Uppercase+self.Lowercase+self.Digits+self.Symbol
         
         
-        if self.var.get() =="all":
+        if self.var1.get() ==1:
             self.all+= self.Uppercase+self.Lowercase+self.Digits+self.Symbol
             print("all")
 
-        if self.var.get()== "Upper":
+        if self.var2.get()== 1:
             self.all+= self.Uppercase
             print("Uppercase")
 
-        if self.var.get() =="Lower":
+        if self.var3.get() ==1:
             self.all+= self.Lowercase
             print('Lower')
 
-        if self.var.get() == "Digit":
+        if self.var4.get() == 1:
             self.all+= self.Digits
             print("digit")
         
-        if self.var.get() == "Symbols":
+        if self.var5.get() == 1:
             self.all+= self.Symbol
             print('symbol')
         
         self.length= int(self.entrylen.get())
+        self.password= "".join(random.sample(self.all,self.length))
+        print('Yes')
+        self.entrypasswor.insert(0,self.password)
+        print(self.password)
                
-        if any(self.exc.isupper() for self.exc in self.all) and any(self.exc.isdigit() for self.exc in self.all) and any(self.exc.isdigit() for self.exc in self.all):
-            self.password= "".join(random.sample(self.all,self.length))
-            print('Yes')
-            self.entrypasswor.insert(0,self.password)
-        else:
-                self.entrypasswor.insert(0,"null")
-                print('NO')
+        # if any(self.exc.isupper() for self.exc in self.all) and any(self.exc.isdigit() for self.exc in self.all) and any(self.exc.lower() for self.exc in self.all):
+        #     self.password= "".join(random.sample(self.all,self.length))
+        #     print('Yes')
+        #     self.entrypasswor.insert(0,self.password)
+        #     print(self.password)
+        # else:
+        #     self.password= "".join(random.sample(self.all,self.length))
+        #     self.entrypasswor.insert(0,"null")
+        #     print('NO')
+        #     print(self.password)
+
+
+            
                 
-
-        
-
     
     def __init__(self, root):
         self.root = root
@@ -67,21 +72,25 @@ class assignment:
 
         self.button = Button(self.frame, text='Generate',font='times 12 bold italic', command= self.generate, width=10, height=1).grid(row=4,column=0)
         #==========options=========
-        self.var = StringVar()
-    
-        self.All = ttk.Radiobutton(self.frame, text='Use all',variable=self.var, value='all' )
+        self.var1 = IntVar()
+        self.var2 = IntVar()
+        self.var3 = IntVar()
+        self.var4 = IntVar()
+        self.var5 = IntVar()
+
+        self.All = Checkbutton(self.frame, text='Use all',variable=self.var1, onvalue=1, offvalue=0 )
         self.All.grid(row=0, column=1, pady=10, padx=20)
 
-        self.uppercase = ttk.Radiobutton(self.frame, text='Uppercase',variable=self.var, value='Upper')
+        self.uppercase = Checkbutton(self.frame, text='Uppercase',variable=self.var2, onvalue=1, offvalue=0)
         self.uppercase.grid(row=0, column=2, pady=10, padx=20)
 
-        self.lowercase = ttk.Radiobutton(self.frame, text='Lowercase', variable=self.var, value="Lower")
+        self.lowercase = Checkbutton(self.frame, text='Lowercase', variable=self.var3, onvalue=1, offvalue=0)
         self.lowercase.grid(row=0, column=3, pady=10, padx=20)
 
-        self.digit = ttk.Radiobutton(self.frame, text='Digit', variable=self.var, value="Digit")
+        self.digit = Checkbutton(self.frame, text='Digit', variable=self.var4, onvalue=1, offvalue=0)
         self.digit.grid(row=1, column=1, pady=10, padx=20)
 
-        self.symbols = ttk.Radiobutton(self.frame, text='Symbols', variable=self.var, value="Symbols")
+        self.symbols = Checkbutton(self.frame, text='Symbols', variable=self.var5, onvalue=1, offvalue=0)
         self.symbols.grid(row=1, column=3, pady=10, padx=20)
         
 
